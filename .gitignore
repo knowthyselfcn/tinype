@@ -26,3 +26,14 @@
 *.exe
 *.out
 *.app
+/*.suo
+/*.opensdf
+/*.sdf
+/Debug
+/test/Debug/*.log
+/test/Debug/test.tlog/*.tlog
+/test/Debug/*.idb
+/test/Debug/*.pdb
+/test/Debug/test.tlog/*.lastbuildstate
+/tinype/Debug/tinype.tlog/*.lastbuildstate
+/tinype/Debug/*.log

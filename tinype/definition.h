@@ -72,7 +72,7 @@ inline Vector normalize(Vector* v){
 
 typedef struct {
     Vector pos;
-    Vector velocity;
+    Vector velocity;    // 矢量速度
     Vector acceleration;   // ?
 
     double damping;
@@ -80,7 +80,7 @@ typedef struct {
     Vector  forceAccum; // 存储下一次模拟迭代的力，每次积分后清零
 } Particle;
 
-
+// 
 inline void particleIntegrate(Particle* p, double duration) {
     assert(duration > 0.0);
 
@@ -90,8 +90,77 @@ inline void particleIntegrate(Particle* p, double duration) {
     addVector(&resultingAcc, &scalarVector(&p->forceAccum, p->inverseMass));
     addVector(&p->velocity, &scalarVector(&resultingAcc, duration));
 
-    scalarVector(& p->velocity,  pow(p->damping, duration) );
+    scalarVector(& p->velocity,  1+pow(p->damping, duration) );
 
+    p->forceAccum = { 0 };
+}
+
+inline bool addForce2Particle(Particle *particle, Vector *force)
+{
+    particle->forceAccum = addVector(&particle->forceAccum, force);
+    return true;
+}
+
+
+
+typedef struct {
+    double age;
+    Particle particle;
+} Firework;
+
+
+typedef struct {
+    unsigned type;
+    double maxAge;
+    double minAge;
+    Vector minVelocity;
+    Vector maxVelocity;
+    double damping;
+
+} FireworkRule;
+
+  
+
+inline bool updateFirework(Firework* firework, double duration)
+{
+    //integrateFirework(firework, duration);
+    firework->age -= duration;
+    return (firework->age < 0);
+}
+
+// just interface
+typedef struct {
+
+} ParticleForceGenerator;
+
+
+// 把一个duration内生成的force 放到下一个duration内，找到对应的particle，就能完成相应的计算过程
+typedef struct ParticleForceRegistry{
+    typedef struct  {
+        Particle *particle;
+        ParticleForceGenerator *fg;
+    } ParticleForceRegistration;
+};
+
+// 各种力可以一起注册的，而不用考虑是重力、推力、
+inline bool registerParticleForce(ParticleForceRegistry *registry, Particle *particle, Vector *force)
+{
+    if (abs(particle->inverseMass) < 0.000001)
+        return true;
+    addForce2Particle(particle, force);
+
+    return false;
+}
+
+inline bool dragParticle(Particle *particle, double k1, double k2)
+{
+    double speed = vectorLength(&particle->velocity);  // 标量速度
+    double dragCoeff = k1 * speed + k2 * speed * speed;
+
+    Vector v = normalize(&particle->velocity);
+    addVector(&particle->forceAccum, &scalarVector(&v, 1 - dragCoeff));
+    // ?? WTF
+    return false;
 }
 
 

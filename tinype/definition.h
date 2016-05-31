@@ -164,4 +164,25 @@ inline bool dragParticle(Particle *particle, double k1, double k2)
 }
 
 
+typedef struct {
+    Particle *other;
+    double springConstant;
+    double restLength;
+} Spring;
+
+// 上一次迭代完成后，物体的pos 都发生了改变
+// 考察spring 的形变量，计算受力的大小
+inline bool addFroceBySpring(Particle *particle, Spring *spring, double duration)
+{
+    Vector pos = particle->pos;
+    Vector distVec = differencePoint(&particle->pos, &spring->other->pos);
+    double delta = abs(vectorLength(&distVec) - spring->restLength); // 形变量，TODO 判断是否超过最大限制
+    Vector dir = normalize(&distVec);
+    addForce2Particle(particle, &scalarVector(&dir, 1 - delta));
+
+    return false;
+
+}
+
+
 #endif

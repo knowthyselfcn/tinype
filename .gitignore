@@ -37,3 +37,12 @@
 /test/Debug/test.tlog/*.lastbuildstate
 /tinype/Debug/tinype.tlog/*.lastbuildstate
 /tinype/Debug/*.log
+/x64/Debug/*.ilk
+/x64/Debug/*.pdb
+/test/x64/Debug/test.tlog/*.tlog
+/test/x64/Debug/test.tlog/*.lastbuildstate
+/test/x64/Debug/*.idb
+/test/x64/Debug/*.pdb
+/tinype/x64/Debug/*.log
+/tinype/x64/Debug/tinype.tlog/*.lastbuildstate
+/test/x64/Debug/*.log

@@ -185,4 +185,22 @@ inline bool addFroceBySpring(Particle *particle, Spring *spring, double duration
 }
 
 
+typedef struct {
+    Particle *other;
+    double springConstant;
+    double restLength;
+} ParticleBungee;
+
+
+inline bool addForceByBungee(Particle *particle, ParticleBungee* bungee, double duration)
+{
+
+
+    return false;
+}
+
+
+
+
+
 #endif

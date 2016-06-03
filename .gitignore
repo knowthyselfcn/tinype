@@ -46,3 +46,8 @@
 /tinype/x64/Debug/*.log
 /tinype/x64/Debug/tinype.tlog/*.lastbuildstate
 /test/x64/Debug/*.log
+/tinype/x64/Debug/tinype.tlog/*.tlog
+/tinype/x64/Debug/*.pdb
+/tinype/x64/Debug/*.idb
+data/
+/tinype/*.user

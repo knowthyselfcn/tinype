@@ -49,5 +49,10 @@
 /tinype/x64/Debug/tinype.tlog/*.tlog
 /tinype/x64/Debug/*.pdb
 /tinype/x64/Debug/*.idb
-data/
 /tinype/*.user
+data/models
+data/textures
+data/shaders
+/tinype/x64
+/tinype/Debug
+/x64

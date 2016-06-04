@@ -21,11 +21,22 @@
     <ClCompile Include="testfirework.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\base\vulkandebug.cpp">
+    <ClCompile Include="util_init.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\base\vulkantools.cpp">
+    <ClCompile Include="util.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="util.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="util_init.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="cube_data.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

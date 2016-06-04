@@ -36,7 +36,7 @@ float fpsTimer = 0.0f;
 // Create logical Vulkan device based on physical device
 //VkResult createDevice(VkDeviceQueueCreateInfo requestedQueues, bool enableValidation);
 // Get window title with example name, device, et.
-std::string getWindowTitle();
+//std::string getWindowTitle();
 // Destination dimensions for resizing the window
 uint32_t destWidth;
 uint32_t destHeight;
@@ -226,7 +226,16 @@ HINSTANCE windowInstance;
 
 
 
+void* my_vkAllocationFunction(
+    void*                                       pUserData,
+    size_t                                      size,
+    size_t                                      alignment,
+    VkSystemAllocationScope                     allocationScope)
+{
 
+
+    return NULL;
+}
 
 
 VkResult createInstance(bool _enableValidation)
@@ -269,6 +278,7 @@ VkResult createInstance(bool _enableValidation)
         instanceCreateInfo.ppEnabledLayerNames = vkDebug::validationLayerNames;
     }
     return vkCreateInstance(&instanceCreateInfo, nullptr, &instance);
+    
 }
 
 
@@ -1687,6 +1697,7 @@ void render()
     if (!prepared)
         return;
     draw();
+    
     vkDeviceWaitIdle(device);
 }
 
@@ -1887,6 +1898,7 @@ void VulkanExampleBase(bool enableValidation)
 #if defined(_WIN32)
     // Enable console if validation is active
     // Debug message callback will output to it
+    setupConsole("VulkanExample");
     if (enableValidation)
     {
         setupConsole("VulkanExample");
@@ -1898,17 +1910,13 @@ void VulkanExampleBase(bool enableValidation)
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR pCmdLine, int nCmdShow)
 {
     //VulkanSwapChain swapChain111;
-    VulkanExampleBase(false);
+    VulkanExampleBase(true);
     setupWindow(hInstance, WndProc);
 
     swapChain.initSurface(windowInstance, window);
     prepare();
     renderLoop();
 
-
-
-
-
-    system("pause");
+ 
     return 0;
 }

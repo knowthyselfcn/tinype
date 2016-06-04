@@ -135,12 +135,12 @@ typedef struct {
 
 
 // 把一个duration内生成的force 放到下一个duration内，找到对应的particle，就能完成相应的计算过程
-typedef struct ParticleForceRegistry{
+typedef struct {
     typedef struct  {
         Particle *particle;
         ParticleForceGenerator *fg;
     } ParticleForceRegistration;
-};
+} ParticleForceRegistry;
 
 // 各种力可以一起注册的，而不用考虑是重力、推力、
 inline bool registerParticleForce(ParticleForceRegistry *registry, Particle *particle, Vector *force)
